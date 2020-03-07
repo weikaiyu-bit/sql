@@ -1,109 +1,129 @@
-# Host: 127.0.0.1  (Version: 5.5.15)
-# Date: 2020-03-06 23:22:05
-# Generator: MySQL-Front 5.3  (Build 4.269)
+/*
+ Navicat Premium Data Transfer
 
-/*!40101 SET NAMES gb2312 */;
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50725
+ Source Host           : localhost:3306
+ Source Schema         : myshop
 
-#
-# Structure for table "category"
-#
+ Target Server Type    : MySQL
+ Target Server Version : 50725
+ File Encoding         : 65001
 
-CREATE TABLE `category` (
+ Date: 07/03/2020 18:10:12
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for category
+-- ----------------------------
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE `category`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
-#
-# Data for table "category"
-#
+-- ----------------------------
+-- Records of category
+-- ----------------------------
+INSERT INTO `category` VALUES (1, 'ç”Ÿæ´»ç”¨å“');
+INSERT INTO `category` VALUES (2, 'å­¦ä¹ ä¹¦ç±');
 
-INSERT INTO `category` VALUES (1,'Éú»îÓÃÆ·'),(2,'Ñ§Ï°Êé¼®');
-
-#
-# Structure for table "product"
-#
-
-CREATE TABLE `product` (
+-- ----------------------------
+-- Table structure for product
+-- ----------------------------
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `subTitle` varchar(255) DEFAULT NULL,
-  `originalPrice` float DEFAULT NULL,
-  `promotePrice` float DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `cid` int(11) DEFAULT NULL,
-  `createDate` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_product_category` (`cid`),
-  CONSTRAINT `fk_product_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `subTitle` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `originalPrice` float NULL DEFAULT NULL,
+  `promotePrice` float NULL DEFAULT NULL,
+  `stock` int(11) NULL DEFAULT NULL,
+  `cid` int(11) NULL DEFAULT NULL,
+  `createDate` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_product_category`(`cid`) USING BTREE,
+  CONSTRAINT `fk_product_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
-#
-# Data for table "product"
-#
+-- ----------------------------
+-- Records of product
+-- ----------------------------
+INSERT INTO `product` VALUES (1, '4æ¡è£… æ´4æ¡è£… æ´ä¸½é›…æ¯›å·¾çº¯æ£‰æ´—è„¸å®¶ç”¨æˆäººæŸ”è½¯å…¨æ£‰å¸æ°´ç”·å¥³åŠ åšå¤§æ¯›å·¾æ´4æ¡è£… æ´ä¸½é›…æ¯›å·¾çº¯æ£‰æ´—è„¸å®¶ç”¨æˆäººæŸ”è½¯å…¨æ£‰å¸æ°´ç”·å¥³åŠ åšå¤§æ¯›åŒå±‚æ¯›å·¾ä¿æ¹¿æ— èŒè€ç”¨å‹ä¸½é›…æ¯›å·¾çº¯æ£‰æ´—è„¸å®¶ç”¨æˆäººæŸ”è½¯è½¯å…¨æ£‰å¸æ°´ç”·å¥³åŠ åšå¤§æ¯›å·¾åŒå±‚æ¯›å·¾ä¿æ¹¿æ— èŒè€ç”¨å‹å…¨æ£‰å¸æ°´ç”·å¥³åŠ åšå¤§æ¯›å·¾åŒå±‚æ¯›å·¾ä¿æ¹¿æ— èŒè€ç”¨å‹', 'å°ç±³åŒå±‚æ¯›å·¾', 29.9, 9.9, 30, 1, NULL);
+INSERT INTO `product` VALUES (2, 'ã€javaã€‘åŸºç¡€ä¹¦ç±ï¼Œä»å…¥é—¨åˆ°ç²¾é€šå­¦ä¹ æ— å‹åŠ›é«˜æ¸…å°åˆ·è´¨é‡æ­£å“', 'æé˜³ç–¯ç‹‚java', 89, 59.9, 60, 2, NULL);
+INSERT INTO `product` VALUES (3, 'æ¯å­å­¦ç”Ÿæ¯ï¼Œè½»ä¾¿æºè¢‹å¯ä¸Šç­æ”¾å­¦ä½¿ç”¨æ½®æµ360mlè€çœ‹niceå‹ä¿æ¸©', '316é’¢æä¿æ¸©æ¯', 69.9, 29.9, 120, 1, NULL);
+INSERT INTO `product` VALUES (4, '4æ¡è£… æ´ä¸½é›…æ¯›å·¾çº¯æ£‰æ´—è„¸å®¶ç”¨æˆäººæŸ”è½¯å…¨æ£‰å¸æ°´ç”·å¥³åŠ åšå¤§æ¯›å·¾åŒå±‚æ¯›å·¾ä¿æ¹¿æ— èŒè€ç”¨å‹æ¯›å·¾', 'å°ç±³åŒå±‚æ¯›å·¾', 29.9, 9.9, 30, 1, NULL);
 
-INSERT INTO `product` VALUES (1,'4Ìõ×° ½àÀöÑÅÃ«½í´¿ÃŞÏ´Á³¼ÒÓÃ³ÉÈËÈáÈíÈ«ÃŞÎüË®ÄĞÅ®¼Óºñ´óÃ«½íË«²ãÃ«½í±£ÊªÎŞ¾úÄÍÓÃĞÍ','Ğ¡Ã×Ë«²ãÃ«½í',29.9,9.9,30,1,NULL),(2,'¡¾java¡¿»ù´¡Êé¼®£¬´ÓÈëÃÅµ½¾«Í¨Ñ§Ï°ÎŞÑ¹Á¦¸ßÇåÓ¡Ë¢ÖÊÁ¿ÕıÆ·','ÀîÑô·è¿ñjava',89,59.9,60,2,NULL),(3,'±­×ÓÑ§Éú±­£¬Çá±ãĞ¯´ü¿ÉÉÏ°à·ÅÑ§Ê¹ÓÃ³±Á÷360mlÄÍ¿´niceĞÍ±£ÎÂ','316¸Ö²Ä±£ÎÂ±­',69.9,29.9,120,1,NULL),(4,'4Ìõ×° ½àÀöÑÅÃ«½í´¿ÃŞÏ´Á³¼ÒÓÃ³ÉÈËÈáÈíÈ«ÃŞÎüË®ÄĞÅ®¼Óºñ´óÃ«½íË«²ãÃ«½í±£ÊªÎŞ¾úÄÍÓÃĞÍ','Ğ¡Ã×Ë«²ãÃ«½í',29.9,9.9,30,1,NULL);
-
-#
-# Structure for table "property"
-#
-
-CREATE TABLE `property` (
+-- ----------------------------
+-- Table structure for property
+-- ----------------------------
+DROP TABLE IF EXISTS `property`;
+CREATE TABLE `property`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cid` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_property_category` (`cid`),
-  CONSTRAINT `fk_property_category` FOREIGN KEY (`cid`) REFERENCES `product` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `cid` int(11) NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_property_category`(`cid`) USING BTREE,
+  CONSTRAINT `fk_property_category` FOREIGN KEY (`cid`) REFERENCES `product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
-#
-# Data for table "property"
-#
+-- ----------------------------
+-- Records of property
+-- ----------------------------
+INSERT INTO `property` VALUES (1, 1, 'é•¿åº¦');
+INSERT INTO `property` VALUES (2, 1, 'é¢œè‰²');
+INSERT INTO `property` VALUES (3, 3, 'æ¯å­å¤§å°');
 
-INSERT INTO `property` VALUES (1,1,'³¤¶È'),(2,1,'ºñ¶È'),(3,3,'±­×Ó´óĞ¡');
-
-#
-# Structure for table "propertyvalue"
-#
-
-CREATE TABLE `propertyvalue` (
+-- ----------------------------
+-- Table structure for propertyvalue
+-- ----------------------------
+DROP TABLE IF EXISTS `propertyvalue`;
+CREATE TABLE `propertyvalue`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pid` (`pid`),
-  CONSTRAINT `propertyvalue_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `property` (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `pid` int(11) NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `pid`(`pid`) USING BTREE,
+  CONSTRAINT `propertyvalue_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `property` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
-#
-# Data for table "propertyvalue"
-#
+-- ----------------------------
+-- Records of propertyvalue
+-- ----------------------------
+INSERT INTO `propertyvalue` VALUES (1, 1, '90cm');
+INSERT INTO `propertyvalue` VALUES (2, 1, '1.2m');
+INSERT INTO `propertyvalue` VALUES (3, 3, '450ml');
+INSERT INTO `propertyvalue` VALUES (4, 3, '380ml');
+INSERT INTO `propertyvalue` VALUES (5, 2, 'ç²‰çº¢è‰²');
+INSERT INTO `propertyvalue` VALUES (6, 2, 'è“è‰²');
+INSERT INTO `propertyvalue` VALUES (7, 2, 'å¡å…¶è‰²');
 
-INSERT INTO `propertyvalue` VALUES (1,1,'90cm'),(2,1,'1.2m'),(3,3,'450ml'),(4,3,'380ml');
-
-#
-# Structure for table "user_"
-#
-
-CREATE TABLE `user_` (
+-- ----------------------------
+-- Table structure for user_
+-- ----------------------------
+DROP TABLE IF EXISTS `user_`;
+CREATE TABLE `user_`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `avatarurl` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `gender` int(11) DEFAULT NULL,
-  `nickname` varchar(255) DEFAULT NULL,
-  `openid` varchar(255) DEFAULT NULL,
-  `province` varchar(255) DEFAULT NULL,
-  `session_key` varchar(255) DEFAULT NULL,
-  `timestamp` varchar(255) DEFAULT NULL,
-  `avatar_url` varchar(255) DEFAULT NULL,
-  `nick_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `avatarurl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `country` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `gender` int(11) NULL DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `openid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `province` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `session_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `timestamp` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
-#
-# Data for table "user_"
-#
+-- ----------------------------
+-- Records of user_
+-- ----------------------------
+INSERT INTO `user_` VALUES (1, NULL, 'Chow', NULL, 1, NULL, 'oMnSq5YjkQr-pR4RgYvu7UPEoenE', 'Guangxi', 'eeGzWbHG8uugi6Ylg0fheQ==', NULL);
 
-INSERT INTO `user_` VALUES (1,NULL,'Chow',NULL,1,NULL,'oMnSq5YjkQr-pR4RgYvu7UPEoenE','Guangxi','eeGzWbHG8uugi6Ylg0fheQ==',NULL,'https://wx.qlogo.cn/mmopen/vi_32/WrAziazlczso2orGnv3rWian4vwJONhQPP3qN6nibBS7Lec1iaaXqqKUwcPQQJRGBYy4Ru1C6YeEl7EY5tYYXYyxAw/132','ÏÂÓêÌì');
+SET FOREIGN_KEY_CHECKS = 1;
