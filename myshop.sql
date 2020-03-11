@@ -11,11 +11,27 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 07/03/2020 18:10:12
+ Date: 11/03/2020 18:03:26
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for alteruser
+-- ----------------------------
+DROP TABLE IF EXISTS `alteruser`;
+CREATE TABLE `alteruser`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `alterName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `alterPassword` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of alteruser
+-- ----------------------------
+INSERT INTO `alteruser` VALUES (1, '123', '456');
 
 -- ----------------------------
 -- Table structure for category
@@ -25,13 +41,12 @@ CREATE TABLE `category`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
 INSERT INTO `category` VALUES (1, '生活用品');
-INSERT INTO `category` VALUES (2, '学习书籍');
 
 -- ----------------------------
 -- Table structure for product
@@ -46,18 +61,28 @@ CREATE TABLE `product`  (
   `stock` int(11) NULL DEFAULT NULL,
   `cid` int(11) NULL DEFAULT NULL,
   `createDate` datetime(0) NULL DEFAULT NULL,
+  `category_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_product_category`(`cid`) USING BTREE,
-  CONSTRAINT `fk_product_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `FK1mtsbur82frn64de7balymq9s`(`category_id`) USING BTREE,
+  CONSTRAINT `fk_product_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK1mtsbur82frn64de7balymq9s` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, '4条装 洁4条装 洁丽雅毛巾纯棉洗脸家用成人柔软全棉吸水男女加厚大毛巾洁4条装 洁丽雅毛巾纯棉洗脸家用成人柔软全棉吸水男女加厚大毛双层毛巾保湿无菌耐用型丽雅毛巾纯棉洗脸家用成人柔软软全棉吸水男女加厚大毛巾双层毛巾保湿无菌耐用型全棉吸水男女加厚大毛巾双层毛巾保湿无菌耐用型', '小米双层毛巾', 29.9, 9.9, 30, 1, NULL);
-INSERT INTO `product` VALUES (2, '【java】基础书籍，从入门到精通学习无压力高清印刷质量正品', '李阳疯狂java', 89, 59.9, 60, 2, NULL);
-INSERT INTO `product` VALUES (3, '杯子学生杯，轻便携袋可上班放学使用潮流360ml耐看nice型保温', '316钢材保温杯', 69.9, 29.9, 120, 1, NULL);
-INSERT INTO `product` VALUES (4, '4条装 洁丽雅毛巾纯棉洗脸家用成人柔软全棉吸水男女加厚大毛巾双层毛巾保湿无菌耐用型毛巾', '小米双层毛巾', 29.9, 9.9, 30, 1, NULL);
+INSERT INTO `product` VALUES (1, '4条装 洁4条装 洁丽雅毛巾纯棉洗脸家用成人柔软全棉吸水男女加厚大毛巾洁4条装 洁丽雅毛巾纯棉洗脸家用成人柔软全棉吸水男女加厚大毛双层毛巾保湿无菌耐用型丽雅毛巾纯棉洗脸家用成人柔软软全棉吸水男女加厚大毛巾双层毛巾保湿无菌耐用型全棉吸水男女加厚大毛巾双层毛巾保湿无菌耐用型', '小米双层毛巾', 29.9, 9.9, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (3, '杯子学生杯，轻便携袋可上班放学使用潮流360ml耐看nice型保温', '316钢材保温杯', 69.9, 29.9, 120, 1, NULL, NULL);
+INSERT INTO `product` VALUES (4, '4条装 洁丽雅毛巾纯棉洗脸家用成人柔软全棉吸水男女加厚大毛巾双层毛巾保湿无菌耐用型毛巾', '小米双层毛巾', 29.9, 9.9, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (5, '瑞士军刀威戈（Wenger）14.4英寸双肩包商务电脑包男 防泼水 黑色（SGB10516109044）', '小米双层毛巾', 109, 89, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (6, '爱华仕（OIWAS）万向轮拉杆箱20英寸登机箱大容量旅行箱男24英寸学生行李箱6152 淡山茱萸粉 20英寸', '万向轮拉杆箱', 309, 89, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (7, '第九城(V.NINE) 电脑包13/14英寸男女士苹果联想小新戴尔手提单肩专用包笔记本横款公文包 VD7BV11911J 深灰', '笔记本横款公文包', 179, 109, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (8, '卡帝乐鳄鱼(CARTELO) 万向轮拉杆箱耐磨防刮20英寸登机箱时尚男女行李箱轻盈商务休闲旅行箱包 炫酷黑', '休闲旅行箱包', 189, 128, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (9, '卡帝乐鳄鱼(CARTELO) 万向轮拉杆箱耐磨防刮20英寸登机箱时尚男女行李箱轻盈商务休闲旅行箱包 炫酷黑', '休闲旅行箱包', 189, 128, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (10, '卡帝乐鳄鱼(CARTELO) 万向轮拉杆箱耐磨防刮20英寸登机箱时尚男女行李箱轻盈商务休闲旅行箱包 炫酷黑', '休闲旅行箱包', 189, 128, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (11, 'FOOJO 挂钩 无痕透明粘钩 浴室挂钩贴 免钉承重厨房强力粘钩 无痕钉墙面衣柜门后挂衣钩 10片套装', '挂衣钩粘钩', 29, 19, 30, 1, NULL, NULL);
+INSERT INTO `product` VALUES (12, '洁比世 精品桃木梳 月牙细齿 防静电美发按摩梳子', '按摩梳子', 9, 5.9, 30, 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for property
@@ -78,6 +103,19 @@ CREATE TABLE `property`  (
 INSERT INTO `property` VALUES (1, 1, '长度');
 INSERT INTO `property` VALUES (2, 1, '颜色');
 INSERT INTO `property` VALUES (3, 3, '杯子大小');
+
+-- ----------------------------
+-- Table structure for property_propertyvalues
+-- ----------------------------
+DROP TABLE IF EXISTS `property_propertyvalues`;
+CREATE TABLE `property_propertyvalues`  (
+  `Property_id` int(11) NOT NULL,
+  `propertyvalues_id` int(11) NOT NULL,
+  UNIQUE INDEX `UK_6g3ov71thmcjhbicy2ccxd26c`(`propertyvalues_id`) USING BTREE,
+  INDEX `FK3y1bdllnbkbogdh2mwxwt1g9c`(`Property_id`) USING BTREE,
+  CONSTRAINT `FK3y1bdllnbkbogdh2mwxwt1g9c` FOREIGN KEY (`Property_id`) REFERENCES `property` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FKsxntcbh6yr9geux86ii8p73n8` FOREIGN KEY (`propertyvalues_id`) REFERENCES `propertyvalue` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for propertyvalue
